@@ -1,0 +1,1 @@
+This is an integration of the company Anthropic's MCP (Model Context Protocol) with Nasa's Mast API in order to forego the Mast portal and download data products directly through Claude. There is also a .Fits (Flexible Image Transport System) file reader which takes three fits files and creates a false color image by stacking a red, green, and blue layer on top of eachother.
