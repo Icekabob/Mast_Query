@@ -13,9 +13,9 @@ import numpy as np
 #----------------  User Defined Input  --------------------
 
 #  list of i2d JWST fits files in RGB order
-fits_files = ['M57_f150w2_i2d.fits',
-              'M57_f300m_i2d.fits',
-              'M57_f335m_i2d.fits']
+fits_files = ['mastDownload/JWST/jw02731001001_02103_00003_nrcb3/jw02731001001_02103_00003_nrcb3_i2d.fits',
+              'mastDownload/JWST/jw02731001001_02103_00003_nrcb3/jw02731001001_02103_00003_nrcb3_i2d.fits',
+              'mastDownload/JWST/jw02731001001_02103_00003_nrcb3/jw02731001001_02103_00003_nrcb3_i2d.fits']
 
               # 'M57_f212n_i2d.fits',  # filter not used
               
