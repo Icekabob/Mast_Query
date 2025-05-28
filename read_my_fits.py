@@ -12,10 +12,10 @@ import numpy as np
 
 #----------------  User Defined Input  --------------------
 
-#  list of i2d JWST fits files in RGB order
-fits_files = ['mastDownload/JWST/jw02731001001_02103_00003_nrcb3/jw02731001001_02103_00003_nrcb3_i2d.fits',
-              'mastDownload/JWST/jw02731001001_02103_00003_nrcb3/jw02731001001_02103_00003_nrcb3_i2d.fits',
-              'mastDownload/JWST/jw02731001001_02103_00003_nrcb3/jw02731001001_02103_00003_nrcb3_i2d.fits']
+#  list of i2d JWST fits files in RGB order/Users/trevormartinez/Documents/GitHub/Mast_Query/mastDownload/JWST/
+fits_files = ['/Users/trevormartinez/Documents/GitHub/Mast_Query/mastDownload/JWST/jw02731-o001_t017_nircam_clear-f187n/jw02731-o001_t017_nircam_clear-f187n_i2d.fits',
+              '/Users/trevormartinez/Documents/GitHub/Mast_Query/mastDownload/JWST/jw02731-o001_t017_nircam_clear-f187n/jw02731-o001_t017_nircam_clear-f187n_i2d.fits',
+              '/Users/trevormartinez/Documents/GitHub/Mast_Query/mastDownload/JWST/jw02731-o001_t017_nircam_clear-f187n/jw02731-o001_t017_nircam_clear-f187n_i2d.fits']
 
               # 'M57_f212n_i2d.fits',  # filter not used
               

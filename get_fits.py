@@ -12,29 +12,33 @@ conf.max_width = 500    # or any large number
 print(Observations.list_missions())
 obs_table = Observations.query_criteria(
     objectname='NGC 3324',  # Example object, replace with your target
-    #objectname=input("Please input the space object you're looking for: "), 
+    # objectname=input("Please input the space object you're looking for: "), 
     obs_collection='JWST',  # Uncomment if you want to specify a collection
-    #obs_collection=input("Please input the mission name (e.g., 'JWST'): "),
+    # obs_collection=input("Please input the mission name (e.g., 'JWST'): "),
     instrument_name='NIRCAM/IMAGE',
-    #instrument_name=input("Please input the instrument name (e.g., 'NIRCAM/IMAGE'): "),
+    # instrument_name=input("Please input the instrument name (e.g., 'NIRCAM/IMAGE'): "),
     dataRights='PUBLIC',
-    #dataRights=input("Please input the data rights (e.g., 'PUBLIC'): "),
+    # dataRights=input("Please input the data rights (e.g., 'PUBLIC'): "),
     dataproduct_type='image',
-    #dataproduct_type=input("Please input the data product type (e.g., 'image'): "
+    # dataproduct_type=input("Please input the data product type (e.g., 'image'): "),
     calib_level='3'
 )
 print("Searching for tables")
 print(f"Found {len(obs_table)} observations")
 if len(obs_table) > 0:
-    print(obs_table['obsid', 'target_name', 'instrument_name', 'filters', 'calib_level'])
+    # Print the entire table without truncation
+    with np.printoptions(threshold=np.inf, linewidth=200):
+         print(obs_table['obsid', 'target_name', 'instrument_name', 'filters', 'calib_level'])
 
     while True:
         try:
+            #Ask user which index they would like to choose from
             x = int(input("Please input the index: "))
             obs_id = obs_table[x]['obsid']
             data_products = Observations.get_product_list(obs_id)
             fits_products = Observations.filter_products(
                 data_products,
+                #Filter products based on image 2 dimension flexible image
                 extension="i2d.fits"
             )
 
@@ -43,8 +47,20 @@ if len(obs_table) > 0:
                 # Show up to 50 results, or all if fewer
                 print(fits_products['productFilename', 'productSubGroupDescription', 'dataproduct_type'])
 
+                # Dataproduct selector
+                while True:
+                    try:
+                        dp_index = int(input(f"Select the data product index (0-{len(fits_products)-1}): "))
+                        if 0 <= dp_index < len(fits_products):
+                            break
+                        else:
+                            print("Index out of range.")
+                    except ValueError:
+                        print("Please enter a valid integer.")
+
                 try:
-                    download_info = Observations.download_products(fits_products[0:1])
+                #Download data product and save it to mastDownload folder for later
+                    download_info = Observations.download_products(fits_products[dp_index:dp_index+1])
                     fits_file_path = download_info['Local Path'][0]
                     print(f"\nDownloaded file: {fits_file_path}")
 
@@ -53,6 +69,7 @@ if len(obs_table) > 0:
                         for i, hdu in enumerate(hdul):
                             if hdu.data is not None:
                                 try:
+                                    #Open fits file and display the image data
                                     image_data = hdu.data
                                     print(f"\nImage shape: {image_data.shape}")
                                     print(f"Data min/max: {np.nanmin(image_data)}/{np.nanmax(image_data)}")
