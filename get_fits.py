@@ -3,29 +3,18 @@ from astropy.io import fits
 from astropy.table import conf
 import matplotlib.pyplot as plt
 import numpy as np
+from mcp.server.fastmcp import FastMCP
+from typing import Any
+import httpx
 
-conf.max_lines = 1000   # or any large number
-conf.max_width = 500    # or any large number
+mcp = FastMCP("JWST")
 
-
-# Step 1: Search for observations
-# obs_table = Observations.query_criteria(
-#     objectname='NGC 3324',  # Example object, replace with your target
-#     obs_collection='JWST',  # Uncomment if you want to specify a collection
-#     instrument_name='NIRCAM/IMAGE',
-#     dataRights='PUBLIC',
-#     dataproduct_type='image',
-#     calib_level='3',
-
-#     # objectname=input("Please input the space object you're looking for: "),
-#     # obs_collection=input("Please input the mission name (e.g., 'JWST'): "),
-#     # instrument_name=input("Please input the instrument name (e.g., 'NIRCAM/IMAGE'): "),
-#     # dataRights=input("Please input the data rights (e.g., 'PUBLIC'): "),
-#     # dataproduct_type=input("Please input the data product type (e.g., 'image'): "),
-
-# )
-
+@mcp.tool()
 def execute(objectname, obs_collection, instrument_name, dataRights, dataproduct_type, calib_level):
+
+    conf.max_lines = 1000   # or any large number
+    conf.max_width = 500    # or any large number
+
     obs_table = Observations.query_criteria(
         objectname=objectname,
         obs_collection=obs_collection,
@@ -116,12 +105,16 @@ def execute(objectname, obs_collection, instrument_name, dataRights, dataproduct
     else:
         print("No observations found. Try a different search approach.")
 
-print(Observations.list_missions())
+if __name__ == "__main__":
+    # Initialize and run the server
+    mcp.run(transport='stdio')
 
-objectname=input("Please input the space object you're looking for: ")
-obs_collection=input("Please input the mission name (e.g., 'JWST'): ")
-instrument_name=input("Please input the instrument name (e.g., 'NIRCAM/IMAGE'): ")
-dataRights=input("Please input the data rights (e.g., 'PUBLIC'): ")
-dataproduct_type=input("Please input the data product type (e.g., 'image'): ")
+# print(Observations.list_missions())
 
-execute(objectname, obs_collection, instrument_name, dataRights, dataproduct_type, calib_level='3')
+# objectname=input("Please input the space object you're looking for: ")
+# obs_collection=input("Please input the mission name (e.g., 'JWST'): ")
+# instrument_name=input("Please input the instrument name (e.g., 'NIRCAM/IMAGE'): ")
+# dataRights=input("Please input the data rights (e.g., 'PUBLIC'): ")
+# dataproduct_type=input("Please input the data product type (e.g., 'image'): ")
+
+# execute(objectname, obs_collection, instrument_name, dataRights, dataproduct_type, calib_level='3')
