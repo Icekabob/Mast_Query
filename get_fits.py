@@ -8,12 +8,25 @@ from typing import Any
 import httpx
 
 mcp = FastMCP("JWST")
-
+#define mcp tool
 @mcp.tool()
-def execute(objectname, obs_collection, instrument_name, dataRights, dataproduct_type, calib_level):
-
+def JWST_search(objectname, obs_collection='JWST', instrument_name='NIRCAM/IMAGE', dataRights='PUBLIC', dataproduct_type='image', calib_level=3):
+    """Execute a search for JWST observations and download FITS files.
+    
+    Args:
+        objectname (str): Name of the astronomical object to search for.
+        obs_collection (str): Name of the observation collection (default is 'JWST').
+        instrument_name (str): Name of the instrument (default is 'NIRCAM/IMAGE').
+        dataRights (str): Data rights (default is 'PUBLIC').
+        dataproduct_type (str): Type of data product to search for (default is 'image').
+        calib_level (int): Calibration level to filter observations (default is 3).
+    """
     conf.max_lines = 1000   # or any large number
     conf.max_width = 500    # or any large number
+
+    obs_collection = obs_collection.upper()  # Ensure collection name is uppercase
+    instrument_name = instrument_name.upper()  # Ensure instrument name is uppercase
+    dataRights = dataRights.upper()  # Ensure data rights is uppercase
 
     obs_table = Observations.query_criteria(
         objectname=objectname,
@@ -107,7 +120,15 @@ def execute(objectname, obs_collection, instrument_name, dataRights, dataproduct
 
 if __name__ == "__main__":
     # Initialize and run the server
-    mcp.run(transport='stdio')
+    # mcp.run(transport='stdio')
+    JWST_search(
+        # objectname='Horsehead Nebula',  # Example object
+        objectname=input("Please input the space object you're looking for: ")
+        # obs_collection=input("Please input the mission name (e.g., 'JWST'): "),
+        # instrument_name=input("Please input the instrument name (e.g., 'NIRCAM/IMAGE'): "),
+        # dataRights=input("Please input the data rights (e.g., 'PUBLIC'): "),
+        # dataproduct_type=input("Please input the data product type (e.g., 'image'): ")
+    )
 
 # print(Observations.list_missions())
 
