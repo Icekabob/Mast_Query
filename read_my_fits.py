@@ -12,10 +12,10 @@ import numpy as np
 
 #----------------  User Defined Input  --------------------
 
-#  list of i2d JWST fits files in RGB order
-fits_files = ['M57_f150w2_i2d.fits',
-              'M57_f300m_i2d.fits',
-              'M57_f335m_i2d.fits']
+#  list of i2d JWST fits files in RGB order/Users/trevormartinez/Documents/GitHub/Mast_Query/mastDownload/JWST/
+fits_files = ['/Users/trevormartinez/Downloads/MAST_2025-06-12T2108/JWST/jw01714-o006_t005_nircam_clear-f480m/jw01714-o006_t005_nircam_clear-f480m_i2d.fits',
+              '/Users/trevormartinez/Downloads/MAST_2025-06-12T2116 2/JWST/jw01714-o002_t004_miri_f2100w/jw01714-o002_t004_miri_f2100w_i2d.fits',
+              '/Users/trevormartinez/Downloads/MAST_2025-06-12T2117/JWST/jw01714-o001_t001_miri_f1800w/jw01714-o001_t001_miri_f1800w_i2d.fits']
 
               # 'M57_f212n_i2d.fits',  # filter not used
               

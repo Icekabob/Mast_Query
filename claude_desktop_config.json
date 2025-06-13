@@ -1,0 +1,31 @@
+{
+  "mcpServers": {
+    "JWST": {
+      "command": "/Users/trevormartinez/.local/bin/uv",
+      "args": [
+        "--directory",
+        "/Users/trevormartinez/Documents/GitHub/Mast_Query",
+        "run",
+        "get_fits.py"
+      ]
+    },
+    "weather": {
+      "command": "/Users/trevormartinez/.local/bin/uv",
+      "args": [
+        "--directory",
+        "/Users/trevormartinez/weather",
+        "run",
+        "weather.py"
+      ]
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/Users/trevormartinez/Desktop",
+        "/Users/trevormartinez/Downloads"
+      ]
+    }
+}
+}
