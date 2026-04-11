@@ -30,6 +30,5 @@ def main():
         obsid=obsid,
         product_type='SCIENCE',
         filter_name=filter_name
-        )
 if __name__ == "__main__":
     main()
